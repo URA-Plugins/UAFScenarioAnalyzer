@@ -54,7 +54,7 @@ namespace UAFScenarioAnalyzer
                 progress.Increment(read / msg.Content.Headers.ContentLength ?? 1 * 0.5);
             }
             using var archive = new ZipArchive(stream);
-            archive.ExtractToDirectory("Plugins", true);
+            archive.ExtractToDirectory(Path.Combine("Plugins", Name), true);
             progress.Increment(25);
 
             progress.StopTask();
