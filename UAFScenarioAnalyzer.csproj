@@ -40,7 +40,7 @@
   </ItemGroup>
 
   <Target Name="PostBuild" AfterTargets="PostBuildEvent">
-    <Exec Command="copy /Y &quot;$(TargetPath)&quot; &quot;%25localappdata%25/UmamusumeResponseAnalyzer/Plugins/&quot;" />
+    <Exec Command="copy /Y &quot;$(TargetPath)&quot; &quot;%25localappdata%25/UmamusumeResponseAnalyzer/Plugins/UAFScenarioAnalyzer/&quot;" />
   </Target>
 
 </Project>
