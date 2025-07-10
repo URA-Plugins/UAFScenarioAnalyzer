@@ -1,13 +1,9 @@
 ﻿using EventLoggerPlugin;
 using Gallop;
 using MathNet.Numerics.Distributions;
-using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using Spectre.Console;
-using System.IO;
 using System.IO.Compression;
-using System.IO.Pipes;
-using System.Threading.Tasks;
 using UmamusumeResponseAnalyzer;
 using UmamusumeResponseAnalyzer.Game.TurnInfo;
 using UmamusumeResponseAnalyzer.LocalizedLayout.Handlers;
@@ -20,17 +16,18 @@ namespace UAFScenarioAnalyzer
 {
     public class UAFScenarioAnalyzer : IPlugin
     {
-        public Version Version => new(1, 0, 0);
+        public Version Version => new(1, 0, 1);
 
+        [PluginDescription("解析UAF剧本回合信息")]
         public string Name => "UAFScenarioAnalyzer";
-
-        public string Author => "";
+        public string Author => "离披&Github Contributors";
+        public string[] Targets => [];
         public async Task UpdatePlugin(ProgressContext ctx)
         {
-            var progress = ctx.AddTask($"[UAFScenarioAnalyzer] Update");
+            var progress = ctx.AddTask($"[{Name}] 更新");
 
             using var client = new HttpClient();
-            using var resp = await client.GetAsync("https://api.github.com/repos/URA-Plugins/UAFScenarioAnalyzer/releases/latest");
+            using var resp = await client.GetAsync($"https://api.github.com/repos/URA-Plugins/{Name}/releases/latest");
             var json = await resp.Content.ReadAsStringAsync();
             var jo = JObject.Parse(json);
 
@@ -43,7 +40,12 @@ namespace UAFScenarioAnalyzer
             }
             progress.Increment(25);
 
-            using var msg = await client.GetAsync(jo["assets"][0]["browser_download_url"].ToString(), HttpCompletionOption.ResponseHeadersRead);
+            var downloadUrl = jo["assets"][0]["browser_download_url"].ToString();
+            if (Config.Updater.IsGithubBlocked && !Config.Updater.ForceUseGithubToUpdate)
+            {
+                downloadUrl = downloadUrl.Replace("https://", "https://gh.shuise.dev/");
+            }
+            using var msg = await client.GetAsync(downloadUrl, HttpCompletionOption.ResponseHeadersRead);
             using var stream = await msg.Content.ReadAsStreamAsync();
             var buffer = new byte[8192];
             while (true)
