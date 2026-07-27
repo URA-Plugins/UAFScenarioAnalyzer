@@ -61,7 +61,7 @@ namespace UAFScenarioAnalyzer.i18n {
         }
         
         /// <summary>
-        ///   查找类似 :red_exclamation_mark:{0} to {1} for the rank of {2}{3} actual effective is {4} 的本地化字符串。
+        ///   查找类似 ⚠ {0} to {1} for the rank of {2}{3} actual effective is {4} 的本地化字符串。
         /// </summary>
         internal static string I18N_ActualBestEffectiveTalk {
             get {
@@ -70,7 +70,7 @@ namespace UAFScenarioAnalyzer.i18n {
         }
         
         /// <summary>
-        ///   查找类似 [green]All ranks are met![/] 的本地化字符串。
+        ///   查找类似 All ranks are met! 的本地化字符串。
         /// </summary>
         internal static string I18N_AllRankOK {
             get {
@@ -79,7 +79,7 @@ namespace UAFScenarioAnalyzer.i18n {
         }
         
         /// <summary>
-        ///   查找类似 :red_exclamation_mark:{0} to {1} for the maximum rank of {2} 的本地化字符串。
+        ///   查找类似 ⚠ {0} to {1} for the maximum rank of {2} 的本地化字符串。
         /// </summary>
         internal static string I18N_BestEffectiveTalk {
             get {
@@ -88,7 +88,7 @@ namespace UAFScenarioAnalyzer.i18n {
         }
         
         /// <summary>
-        ///   查找类似 :red_exclamation_mark:Without talk, {0} for the maximum rank of {1} 的本地化字符串。
+        ///   查找类似 ⚠ Without talk, {0} for the maximum rank of {1} 的本地化字符串。
         /// </summary>
         internal static string I18N_BestEffectiveWithoutTalk {
             get {
@@ -115,7 +115,7 @@ namespace UAFScenarioAnalyzer.i18n {
         }
         
         /// <summary>
-        ///   查找类似 :red_exclamation_mark:{0}：need {1} 的本地化字符串。
+        ///   查找类似 ⚠ {0}: need {1} 的本地化字符串。
         /// </summary>
         internal static string I18N_LowSportRank {
             get {
@@ -124,7 +124,7 @@ namespace UAFScenarioAnalyzer.i18n {
         }
         
         /// <summary>
-        ///   查找类似 :red_exclamation_mark:The minimum sports rank for the current period is {0} 的本地化字符串。
+        ///   查找类似 ⚠ The minimum sports rank for the current period is {0} 的本地化字符串。
         /// </summary>
         internal static string I18N_MinimumSportRank {
             get {
@@ -133,7 +133,7 @@ namespace UAFScenarioAnalyzer.i18n {
         }
         
         /// <summary>
-        ///   查找类似 , exceeded [aqua]{0}%[/] of Morita 的本地化字符串。
+        ///   查找类似 , exceeded {0}% of Morita 的本地化字符串。
         /// </summary>
         internal static string I18N_MoritaRanking {
             get {
@@ -142,7 +142,7 @@ namespace UAFScenarioAnalyzer.i18n {
         }
         
         /// <summary>
-        ///   查找类似 Clicked [aqua]{0}[/] times on Morita 的本地化字符串。
+        ///   查找类似 Clicked {0} times on Morita 的本地化字符串。
         /// </summary>
         internal static string I18N_MoritaTrained {
             get {
@@ -151,7 +151,7 @@ namespace UAFScenarioAnalyzer.i18n {
         }
         
         /// <summary>
-        ///   查找类似 Recover vital [aqua]{0}[/] times 的本地化字符串。
+        ///   查找类似 Recover vital {0} times 的本地化字符串。
         /// </summary>
         internal static string I18N_MoritaVitalGainTimes {
             get {
@@ -169,7 +169,7 @@ namespace UAFScenarioAnalyzer.i18n {
         }
         
         /// <summary>
-        ///   查找类似 :red_exclamation_mark:Current has rank bonus 的本地化字符串。
+        ///   查找类似 ⚠ Current has rank bonus 的本地化字符串。
         /// </summary>
         internal static string I18N_RankGainIncreased {
             get {
@@ -178,7 +178,7 @@ namespace UAFScenarioAnalyzer.i18n {
         }
         
         /// <summary>
-        ///   查找类似 :red_exclamation_mark:Please use talk in time 的本地化字符串。
+        ///   查找类似 ⚠ Please use talk in time 的本地化字符串。
         /// </summary>
         internal static string I18N_RememberUseTalk {
             get {
@@ -187,7 +187,7 @@ namespace UAFScenarioAnalyzer.i18n {
         }
         
         /// <summary>
-        ///   查找类似 [yellow]This turn is a duplicate display[/] 的本地化字符串。
+        ///   查找类似 This turn is a duplicate display 的本地化字符串。
         /// </summary>
         internal static string I18N_RepeatTurn {
             get {
@@ -196,7 +196,7 @@ namespace UAFScenarioAnalyzer.i18n {
         }
         
         /// <summary>
-        ///   查找类似 :sparkles:{0} turns [blue]blue[/] can burst 的本地化字符串。
+        ///   查找类似 ✨ {0} turns blue can burst 的本地化字符串。
         /// </summary>
         internal static string I18N_TalkToGetBlueBuff {
             get {
@@ -205,7 +205,7 @@ namespace UAFScenarioAnalyzer.i18n {
         }
         
         /// <summary>
-        ///   查找类似 :sparkles:{0} turns [red]red[/] can burst 的本地化字符串。
+        ///   查找类似 ✨ {0} turns red can burst 的本地化字符串。
         /// </summary>
         internal static string I18N_TalkToGetRedBuff {
             get {
@@ -214,7 +214,7 @@ namespace UAFScenarioAnalyzer.i18n {
         }
         
         /// <summary>
-        ///   查找类似 :sparkles:{0} turns [yellow]yellow[/] can burst 的本地化字符串。
+        ///   查找类似 ✨ {0} turns yellow can burst 的本地化字符串。
         /// </summary>
         internal static string I18N_TalkToGetYellowBuff {
             get {
@@ -223,7 +223,7 @@ namespace UAFScenarioAnalyzer.i18n {
         }
         
         /// <summary>
-        ///   查找类似 [red]Warning: Incorrect turn, the previous turn was {0}, the current turn is {1}[/] 的本地化字符串。
+        ///   查找类似 ⚠ Warning: Incorrect turn, the previous turn was {0}, the current turn is {1} 的本地化字符串。
         /// </summary>
         internal static string I18N_WrongTurnAlert {
             get {

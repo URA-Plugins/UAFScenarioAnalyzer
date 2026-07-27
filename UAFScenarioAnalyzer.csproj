@@ -1,15 +1,29 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-	<TargetFramework>net10.0</TargetFramework>
+    <IsUraPlugin>true</IsUraPlugin>
+    <TargetFramework>net10.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
-    <RunPostBuildEvent>Always</RunPostBuildEvent>
+    <CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
+    <Version>1.0.0</Version>
+
+    <!-- URA 插件元数据：供发布 manifest 使用 -->
+    <PluginInternalName>UAFScenarioAnalyzer</PluginInternalName>
+    <PluginDisplayName>解析UAF剧本回合信息</PluginDisplayName>
+    <PluginAuthor>离披&amp;Github Contributors</PluginAuthor>
+    <PluginRepositoryUrl>https://github.com/URA-Plugins/UAFScenarioAnalyzer</PluginRepositoryUrl>
+    <PluginDependencies>EventLoggerPlugin</PluginDependencies>
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\UmamusumeResponseAnalyzer\UmamusumeResponseAnalyzer\UmamusumeResponseAnalyzer.csproj" />
-    <ProjectReference Include="..\EventLoggerPlugin\EventLoggerPlugin.csproj" />
+    <PackageReference Include="MathNet.Numerics" Version="5.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\EventLoggerPlugin\EventLoggerPlugin.csproj">
+      <Private>False</Private>
+    </ProjectReference>
   </ItemGroup>
 
   <ItemGroup>
@@ -39,15 +53,5 @@
       <SubType>Designer</SubType>
     </EmbeddedResource>
   </ItemGroup>
-
-  <ItemGroup>
-    <None Update="manifest.json">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-  </ItemGroup>
-
-  <Target Name="PostBuild" AfterTargets="PostBuildEvent">
-    <Exec Command="copy /Y &quot;$(TargetPath)&quot; &quot;%25localappdata%25/UmamusumeResponseAnalyzer/Plugins/UAFScenarioAnalyzer/&quot;" />
-  </Target>
 
 </Project>
