@@ -1,7 +1,7 @@
 ﻿using EventLoggerPlugin;
 using Gallop;
-using Gallop.Endpoints;
 using MathNet.Numerics.Distributions;
+using Terminal.Gui.App;
 using UmamusumeResponseAnalyzer.TerminalGui;
 using UmamusumeResponseAnalyzer.Plugin;
 using static UAFScenarioAnalyzer.i18n.Game;
@@ -13,23 +13,25 @@ namespace UAFScenarioAnalyzer
     public class UAFScenarioAnalyzer : IPlugin
     {
         const string WorkspaceTitle = "UAFScenarioAnalyzer";
-        const string TrainingPanelKey = "training";
 
-        Workspace? workspace;
-        bool hasPublishedTrainingPanel;
+        ScenarioHistory? history;
 
-        public void Initialize(IPluginContext _) { }
+        public void Initialize(IPluginContext context)
+        {
+            history = new(context.Application, WorkspaceTitle, ScenarioHistorySettings.Load());
+            context.Analyzers.Register<SingleModeSportCheckEventResponse>(
+                AnalyzerKind.Response,
+                [EndpointPattern.Exact("/umamusume/single_mode_sport/check_event")],
+                invocation => Analyze(invocation.Payload),
+                priority: 1);
+        }
 
         public void Dispose()
         {
-            if (!hasPublishedTrainingPanel || workspace is not { } publishedWorkspace)
-                return;
-
-            publishedWorkspace.RemovePanel(TrainingPanelKey);
-            hasPublishedTrainingPanel = false;
+            history?.Dispose();
+            history = null;
         }
 
-        [ResponseAnalyzer<GameApi.SingleModeSport.CheckEvent>(1)]
         public ValueTask Analyze(SingleModeSportCheckEventResponse @event)
         {
             var data = @event.data;
@@ -38,10 +40,24 @@ namespace UAFScenarioAnalyzer
             if (data.home_info?.command_info_array is not null && !(state is 2 or 3)) //根据文本简单过滤防止重复、异常输出
             {
                 if ((@event.data.unchecked_event_array != null && @event.data.unchecked_event_array.Length > 0) || @event.data.race_start_info != null) return ValueTask.CompletedTask;
-                PublishTrainingPanel(ParseSportCommandInfo(@event));
+                var key = new ScenarioHistoryKey(
+                    data.chara_info.single_mode_chara_id,
+                    data.chara_info.turn);
+                history?.Publish(key, ParseSportCommandInfo(@event));
             }
             return ValueTask.CompletedTask;
         }
+
+        public async Task ConfigPromptAsync(
+            IApplication application,
+            CancellationToken cancellationToken = default)
+        {
+            var settings = await ScenarioHistorySettings.EditAsync(application, cancellationToken);
+            cancellationToken.ThrowIfCancellationRequested();
+            settings.Save();
+            history?.ApplyLimit(settings.HistoryLimit);
+        }
+
         public static WorkspaceContent ParseSportCommandInfo(SingleModeSportCheckEventResponse @event)
         {
             var extInfos = new List<string>();
@@ -388,16 +404,5 @@ namespace UAFScenarioAnalyzer
                 };
         }
 
-        void PublishTrainingPanel(WorkspaceContent content)
-        {
-            var workspace = this.workspace ??= Workspace.Create(WorkspaceTitle);
-            workspace.SetPanel(
-                TrainingPanelKey,
-                "训练分析",
-                content,
-                fullBleed: true,
-                switchToWorkspace: !hasPublishedTrainingPanel);
-            hasPublishedTrainingPanel = true;
-        }
     }
 }
