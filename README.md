@@ -17,3 +17,10 @@
 ```
 
 `historyLimit` 的有效范围为 `0` 到 `1000`，默认值为 `100`。设为 `0` 时禁用 history，但仍显示最近一次成功输出。调低上限会立即删除最旧记录；调高上限不会恢复已经删除的记录。
+
+## 构建
+
+```powershell
+git -c core.longpaths=true submodule update --init --recursive
+dotnet build .\UAFScenarioAnalyzer.csproj -c Release -m:1 -p:RuntimeIdentifier=win-x64 -p:SelfContained=false -p:PlatformTarget=AnyCPU -p:DeployUraPluginToLocalAppDataOnBuild=false
+```

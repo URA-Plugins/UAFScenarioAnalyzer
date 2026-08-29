@@ -21,7 +21,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\EventLoggerPlugin\EventLoggerPlugin.csproj">
+    <ProjectReference Include="deps\EventLoggerPlugin\EventLoggerPlugin.csproj"
+                      AdditionalProperties="UraHostProjectPath=$(UraHostProjectPath)">
       <Private>False</Private>
     </ProjectReference>
   </ItemGroup>
