@@ -26,10 +26,11 @@ namespace UAFScenarioAnalyzer
                 priority: 1);
         }
 
-        public void Dispose()
+        public ValueTask DisposeAsync()
         {
             history?.Dispose();
             history = null;
+            return ValueTask.CompletedTask;
         }
 
         public ValueTask Analyze(SingleModeSportCheckEventResponse @event)
