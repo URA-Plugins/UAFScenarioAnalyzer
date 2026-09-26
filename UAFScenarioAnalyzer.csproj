@@ -6,7 +6,7 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
     <CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
-    <Version>2026.9.10</Version>
+    <Version>2026.9.26</Version>
 
     <!-- URA 插件元数据：供发布 manifest 使用 -->
     <PluginInternalName>UAFScenarioAnalyzer</PluginInternalName>
