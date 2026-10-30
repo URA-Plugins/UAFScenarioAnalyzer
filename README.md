@@ -1,5 +1,7 @@
 # UAFScenarioAnalyzer
 
+本插件已停止维护。
+
 解析 UAF 剧本回合训练信息。
 
 ## History
