@@ -1,0 +1,18 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net10.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <IsUraPlugin>false</IsUraPlugin>
+    <GenerateUraPluginManifestOnBuild>false</GenerateUraPluginManifestOnBuild>
+    <PackageUraPluginOnBuild>false</PackageUraPluginOnBuild>
+    <DeployUraPluginToLocalAppDataOnBuild>false</DeployUraPluginToLocalAppDataOnBuild>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="..\Support\*.cs" />
+    <ProjectReference Include="$(UraTestHostRoot)\UmamusumeResponseAnalyzer\UmamusumeResponseAnalyzer.csproj" />
+    <ProjectReference Include="..\..\UAFScenarioAnalyzer.csproj" AdditionalProperties="GenerateUraPluginManifestOnBuild=false;PackageUraPluginOnBuild=false;DeployUraPluginToLocalAppDataOnBuild=false" />
+    <ProjectReference Include="..\..\deps\EventLoggerPlugin\EventLoggerPlugin.csproj" />
+  </ItemGroup>
+</Project>

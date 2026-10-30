@@ -28,3 +28,11 @@ dotnet build .\UAFScenarioAnalyzer.csproj -c Release -m:1 -p:RuntimeIdentifier=w
 ## 验证与发布
 
 在 Windows 仓库根执行 `act workflow_dispatch --artifact-server-path "$env:TEMP/ura-act-artifacts"`。本地与 GitHub 使用同一份 workflow；版本 tag 触发 GitHub Release 发布。环境要求、共用 workflow 本地映射和发布规则见 [URA plugin workflows](https://github.com/URA-Plugins/.github/blob/v1/README.md)。
+
+## 本仓测试
+
+`tests/UAFScenarioAnalyzerSmoke` 默认运行本插件的生命周期、历史配置和显示检查，并检查发布边界。测试工具由本仓 `tests/Support` 持有。
+
+```powershell
+dotnet run --project tests/UAFScenarioAnalyzerSmoke -p:UraTestHostRoot=<Host源码绝对路径> -p:GenerateUraPluginManifestOnBuild=false -p:PackageUraPluginOnBuild=false -p:DeployUraPluginToLocalAppDataOnBuild=false
+```
